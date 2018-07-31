@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { YtsService } from '../service/yts.service'
-import { MovieYTS } from '../MovieYTS'
 
 @Component({
   selector: 'app-movies',
@@ -10,7 +9,7 @@ import { MovieYTS } from '../MovieYTS'
 export class MoviesComponent implements OnInit {
 
   constructor(private ytsService: YtsService) { }
-  private movies: MovieYTS[];
+  public movies: any[];
 
   ngOnInit() {
     this.getYtsMovies();
@@ -18,7 +17,11 @@ export class MoviesComponent implements OnInit {
 
   getYtsMovies(): void {
     this.ytsService.getMoviePage()
-      .subscribe(movies => this.movies = movies);
+      .subscribe(movies => {
+        this.movies = movies
+        console.log(this.movies);
+      }
+      );
   }
 
 }
