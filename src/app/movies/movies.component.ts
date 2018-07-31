@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { YtsService } from '../service/yts.service'
+import { MovieYTS } from '../MovieYTS'
 
 @Component({
   selector: 'app-movies',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MoviesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ytsService: YtsService) { }
+  private movies: MovieYTS[];
 
   ngOnInit() {
+    this.getYtsMovies();
+  }
+
+  getYtsMovies(): void {
+    this.ytsService.getMoviePage()
+      .subscribe(movies => this.movies = movies);
   }
 
 }
