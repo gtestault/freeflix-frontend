@@ -1,4 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Cabin');
 /* autoprefixer: off */
+h2 {
+    font-family: 'Cabin', sans-serif;
+    color: red;
+    font-size: 2.3em;
+    margin: 0.5em;
+    margin-bottom: 0;
+    text-align: left;
+}
 .movie-card {
     max-width: 200px;
     margin-bottom: 1em;

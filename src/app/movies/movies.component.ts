@@ -10,6 +10,7 @@ export class MoviesComponent implements OnInit {
 
   constructor(private ytsService: YtsService) { }
   public movies: any[];
+  public isLoading = true;
 
   ngOnInit() {
     this.getYtsMovies();
@@ -18,8 +19,8 @@ export class MoviesComponent implements OnInit {
   getYtsMovies(): void {
     this.ytsService.getMoviePage()
       .subscribe(movies => {
-        this.movies = movies
-        console.log(this.movies);
+        this.movies = movies;
+        this.isLoading = false;
       }
       );
   }

@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Cabin');
+.loading-container {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-container p {
+    font-family: 'Cabin', sans-serif;
+    color: white;
+    font-size: 1.4em;
+    text-align: center;
+}

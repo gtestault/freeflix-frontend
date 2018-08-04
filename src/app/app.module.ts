@@ -15,12 +15,14 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { PlayerComponent } from './player/player.component';
 import { RouterModule } from '@angular/router';
+import { LoadingComponent } from './player/loading/loading.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MoviesComponent,
-    PlayerComponent
+    PlayerComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
