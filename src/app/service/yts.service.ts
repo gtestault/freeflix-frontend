@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs'
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { catchError, switchMap, skipWhile, take } from 'rxjs/operators';
+import { Observable, throwError, timer } from 'rxjs'
 import { environment } from '../../environments/environment'
 
 @Injectable({
@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment'
 })
 export class YtsService {
   private ytsServiceURL = '/api/yts'
-  private requestMovieURL = '/movie/request'
+  private requestMovieURL = '/api/movie/request'
   constructor(private http: HttpClient) { }
 
   getMoviePage(): Observable<any[]> {
@@ -23,11 +23,20 @@ export class YtsService {
     return this.http.get<any>(
       environment.endpoint + this.requestMovieURL,
       {
-        observe: 'response', params: { "infoHash": infoHash }
+        observe: 'response', params: { "infoHsh": infoHash }
       })
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+  //we want to poll until the server tells us the torrent is available
+  pollForMovieFetched(infoHash: string): Observable<HttpResponse<any>> {
+    return timer(0, 5000).pipe(
+      switchMap(_ => this.requestMovie(infoHash)),
+      skipWhile((res: HttpResponse<any>) => res.status !== 202),
+      take(1)
+    );
   }
 
   private handleError(error: HttpErrorResponse) {
