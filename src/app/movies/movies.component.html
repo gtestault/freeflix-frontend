@@ -1,5 +1,12 @@
-<div>
-  <h2>Freeflix</h2>
+<div class="header-container">
+  <div>
+    <h2>Freeflix</h2>
+  </div>
+  <form class="search-form" (submit)="searchMovie(search.value)">
+      <mat-form-field class="search-field">
+        <input autocomplete="off" matInput placeholder="movie" #search>
+      </mat-form-field>
+  </form>
 </div>
 <div class="movies-container" *ngIf="movies != undefined">
   <div class="movie" *ngFor="let movie of movies">

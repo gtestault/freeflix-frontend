@@ -13,22 +13,28 @@ export class MoviesComponent implements OnInit {
   public isLoading = true;
 
   ngOnInit() {
-    this.getYtsMovies();
+    this.getYtsMovies("");
   }
 
   getHashFromTorrent(torrent: any[]): string {
-    if (torrent.length === 2) {
+    if (torrent === null) {
+      return "";
+    } else if (torrent.length === 2) {
       return torrent[1].Hash;
     }
     return torrent[0].Hash;
   }
 
-  getYtsMovies(): void {
-    this.ytsService.getMoviePage()
+  searchMovie(query: string) : boolean {
+    this.getYtsMovies(query)
+    return false;
+  }
+
+  getYtsMovies(query: string): void {
+    this.ytsService.getMoviePage(query)
       .subscribe(movies => {
         this.movies = movies;
         this.isLoading = false;
-        console.log(movies);
       }
       );
   }

@@ -12,8 +12,12 @@ export class YtsService {
   private requestMovieURL = '/api/movie/request'
   constructor(private http: HttpClient) { }
 
-  getMoviePage(): Observable<any[]> {
-    return this.http.get<any[]>(environment.endpoint + this.ytsServiceURL)
+  getMoviePage(query: string): Observable<any[]> {
+    let params = {}
+    if (query !== "") {
+      params["query"] = query 
+    } 
+    return this.http.get<any[]>(environment.endpoint + this.ytsServiceURL, {params: params})
       .pipe(
         catchError(this.handleError)
       );
