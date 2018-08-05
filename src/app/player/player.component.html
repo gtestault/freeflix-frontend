@@ -1,5 +1,5 @@
 <video *ngIf="videoAvailable" width="1280" height="720" controls>
-  <source src="http://localhost:8080/api/movie/watch" type="video/mp4">
+  <source [src]="'http://localhost:8080/api/movie/watch?infoHash=' + infoHash" type="video/mp4">
 Your browser does not support the video tag.
 </video> 
 <app-loading [text]="loadingText" class="movies-loading"></app-loading>

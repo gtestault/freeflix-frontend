@@ -13,7 +13,7 @@ export class PlayerComponent implements OnInit {
   public loadingText: string = "fetching torrent";
   public videoAvailable: boolean = false;
   @Input() videoTitle: string;
-  private infoHash: string;
+  public infoHash: string;
 
   ngOnInit() {
     this.fetchTorrent();
@@ -27,7 +27,7 @@ export class PlayerComponent implements OnInit {
       return;
     }
     this.ytsService.pollForMovieFetched(this.infoHash).subscribe(_ => {
-      this.loadingText = "buffering"
+      this.loadingText = "buffering";
       this.videoAvailable = true;
     });
   }

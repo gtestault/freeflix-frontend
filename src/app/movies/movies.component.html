@@ -17,7 +17,7 @@
         </p>
       </mat-card-content>
       <mat-card-actions>
-        <a routerLink="/player"><button mat-button>STREAM</button></a>
+        <a routerLink="/player" [queryParams]="{movie: getHashFromTorrent(movie.Torrents)}"><button mat-button>STREAM</button></a>
         <button mat-button>DOWNLOAD</button>
       </mat-card-actions>
     </mat-card>

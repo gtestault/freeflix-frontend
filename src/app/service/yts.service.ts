@@ -23,7 +23,7 @@ export class YtsService {
     return this.http.get<any>(
       environment.endpoint + this.requestMovieURL,
       {
-        observe: 'response', params: { "infoHsh": infoHash }
+        observe: 'response', params: { "infoHash": infoHash }
       })
       .pipe(
         catchError(this.handleError)
