@@ -3,10 +3,15 @@
     <h2>Freeflix</h2>
   </div>
   <form class="search-form" (submit)="searchMovie(search.value)">
-      <mat-form-field class="search-field">
+    <div class="search-field">
+      <mat-form-field>
         <input autocomplete="off" matInput placeholder="movie" #search>
       </mat-form-field>
+    </div>
   </form>
+  <div class="downloads-icon">
+    <mat-icon svgIcon="cloud" matBadge="3" matBadgeColor="warn"></mat-icon>
+  </div>
 </div>
 <div class="movies-container" *ngIf="movies != undefined">
   <div class="movie" *ngFor="let movie of movies">
@@ -17,14 +22,16 @@
         </mat-card-title>
         <mat-card-subtitle>{{movie.Year}}</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image [src]="movie.large_cover_image" alt="No Picture Available" >
+      <img mat-card-image [src]="movie.large_cover_image" alt="No Picture Available">
       <mat-card-content>
         <p>IMDB Rating:
           <span class=imdb-rating>{{movie.Rating}}</span>
         </p>
       </mat-card-content>
       <mat-card-actions>
-        <a routerLink="/player" [queryParams]="{movie: getHashFromTorrent(movie.Torrents)}"><button mat-button>STREAM</button></a>
+        <a routerLink="/player" [queryParams]="{movie: getHashFromTorrent(movie.Torrents)}">
+          <button mat-button>STREAM</button>
+        </a>
         <button mat-button>DOWNLOAD</button>
       </mat-card-actions>
     </mat-card>

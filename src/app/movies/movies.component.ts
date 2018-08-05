@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { YtsService } from '../service/yts.service'
+import {DomSanitizer} from '@angular/platform-browser';
+import {MatIconRegistry} from '@angular/material';
 
 @Component({
   selector: 'app-movies',
@@ -8,7 +10,12 @@ import { YtsService } from '../service/yts.service'
 })
 export class MoviesComponent implements OnInit {
 
-  constructor(private ytsService: YtsService) { }
+  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private ytsService: YtsService) {
+    iconRegistry.addSvgIcon(
+      'cloud',
+      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/cloud-download-regular.svg'));
+  }
+  
   public movies: any[];
   public isLoading = true;
 
@@ -25,7 +32,7 @@ export class MoviesComponent implements OnInit {
     return torrent[0].Hash;
   }
 
-  searchMovie(query: string) : boolean {
+  searchMovie(query: string): boolean {
     this.getYtsMovies(query)
     return false;
   }

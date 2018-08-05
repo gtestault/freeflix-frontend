@@ -14,6 +14,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
+import {MatBadgeModule} from '@angular/material/badge';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { PlayerComponent } from './player/player.component';
 import { LoadingComponent } from './player/loading/loading.component';
@@ -36,6 +37,7 @@ import { LoadingComponent } from './player/loading/loading.component';
     MatIconModule,
     MatProgressSpinnerModule,
     MatInputModule,
+    MatBadgeModule,
     AppRoutingModule,
   ],
   providers: [],
