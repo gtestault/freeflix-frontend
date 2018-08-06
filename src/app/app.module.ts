@@ -18,13 +18,15 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { PlayerComponent } from './player/player.component';
 import { LoadingComponent } from './player/loading/loading.component';
+import { MovieCardComponent } from './movies/movie-card/movie-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MoviesComponent,
     PlayerComponent,
-    LoadingComponent
+    LoadingComponent,
+    MovieCardComponent
   ],
   imports: [
     BrowserModule,

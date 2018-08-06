@@ -1,11 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Cabin');
 /* autoprefixer: off */
-
-.movie-card {
-    max-width: 200px;
-    border-radius: 2px;
-}
-
 .movies-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -36,11 +30,6 @@
 .imdb-rating {
     color: darkgoldenrod;
     font-weight: bold;
-}
-
-a {
-    text-decoration: none;
-    color: white;
 }
 
 .header-container {

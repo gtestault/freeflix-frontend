@@ -15,26 +15,7 @@
 </div>
 <div class="movies-container" *ngIf="movies != undefined">
   <div class="movie" *ngFor="let movie of movies">
-    <mat-card class="movie-card">
-      <mat-card-header>
-        <mat-card-title>
-          <h3 class="movie-title">{{movie.Title | slice : 0 : 20 }}</h3>
-        </mat-card-title>
-        <mat-card-subtitle>{{movie.Year}}</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-image [src]="movie.large_cover_image" alt="No Picture Available">
-      <mat-card-content>
-        <p>IMDB Rating:
-          <span class=imdb-rating>{{movie.Rating}}</span>
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <a routerLink="/player" [queryParams]="{movie: getHashFromTorrent(movie.Torrents)}">
-          <button mat-button>STREAM</button>
-        </a>
-        <button mat-button>DOWNLOAD</button>
-      </mat-card-actions>
-    </mat-card>
+    <app-movie-card [movie]="movie"></app-movie-card>
   </div>
 </div>
 <div>

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { YtsService } from '../service/yts.service'
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
-import {trigger, state, style, animate, transition} from '@angular/animations';
 
 @Component({
   selector: 'app-movies',
@@ -22,15 +21,6 @@ export class MoviesComponent implements OnInit {
 
   ngOnInit() {
     this.getYtsMovies("");
-  }
-
-  getHashFromTorrent(torrent: any[]): string {
-    if (torrent === null) {
-      return "";
-    } else if (torrent.length === 2) {
-      return torrent[1].Hash;
-    }
-    return torrent[0].Hash;
   }
 
   searchMovie(query: string): boolean {

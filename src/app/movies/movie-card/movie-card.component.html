@@ -1,0 +1,19 @@
+<mat-card class="movie-card" [@movieState]="this.state" (mouseover)="this.state='active'" (mouseout)="this.state='inactive'">
+  <mat-card-header>
+    <mat-card-title>
+      <h3 class="movie-title">{{movie.Title | slice : 0 : 20 }}</h3>
+    </mat-card-title>
+    <mat-card-subtitle>{{movie.Year}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]="movie.large_cover_image" alt="No Picture Available">
+  <mat-card-content>
+    <p>IMDB Rating:
+      <span class=imdb-rating>{{movie.Rating}}</span>
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <a routerLink="/player" [queryParams]="{movie: getHashFromTorrent(movie.Torrents)}">
+      <button mat-button>STREAM</button>
+    </a>
+  </mat-card-actions>
+</mat-card>
