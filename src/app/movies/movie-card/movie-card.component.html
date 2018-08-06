@@ -1,7 +1,10 @@
 <a routerLink="/player" [queryParams]="{movie: getHashFromTorrent(movie.Torrents)}">
-<div class="movie-card" [@movieState]="this.state" (mouseenter)="this.state='active'" (mouseleave)="this.state='inactive'">
-  
+  <div class="movie-card" [@movieState]="this.state" (mouseenter)="this.state='active'" (mouseleave)="this.state='inactive'">
+
     <img [@movieStateDim]="this.state" [src]="movie.large_cover_image">
-  <div class="movie-title" [@movieStateShow]="this.state"><h3>{{movie.Title}}</h3></div>
-</div>
+    <div class="movie-title" [@movieStateShow]="this.state">
+      <h3>{{movie.Title}}</h3>
+      <h3 class="movie-rating">{{movie.Rating}}</h3>
+    </div>
+  </div>
 </a>
