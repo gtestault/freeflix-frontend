@@ -13,8 +13,28 @@ import { trigger, state, style, animate, transition} from '@angular/animations';
       state('active',   style({
         borderColor: 'red',
       })),
-      transition('inactive => active', animate('50ms ease-in')),
-      transition('active => inactive', animate('50ms ease-out'))
+      transition('inactive => active', animate('0ms ease-in')),
+      transition('active => inactive', animate('0ms ease-out'))
+    ]),
+    trigger('movieStateDim', [
+      state('inactive', style({
+        opacity: 1.0
+      })),
+      state('active', style({
+        opacity: 0.2
+      })),
+      transition('inactive => active', animate('0ms ease-in')),
+      transition('active => inactive', animate('0ms ease-out'))
+    ]),
+    trigger('movieStateShow', [
+      state('inactive', style({
+        opacity: 0
+      })),
+      state('active', style({
+        opacity: 1
+      })),
+      transition('inactive => active', animate('0ms ease-in')),
+      transition('active => inactive', animate('0ms ease-out'))
     ])
   ]
 })

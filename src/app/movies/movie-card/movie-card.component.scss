@@ -1,10 +1,22 @@
 .movie-card {
-    max-width: 200px;
+    position: relative;
     border-radius: 2px;
     border: 2px solid black;
-}
-
-a {
     text-decoration: none;
     color: white;
+    
+    img {
+        width: 150px;
+        //black magic fuckery
+        //somehow angular routerLink on img takes up space...
+        margin-bottom: -4px;
+    }
+    .movie-title {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: 'Cabin', sans-serif;
+        user-select: none;
+    }
 }
