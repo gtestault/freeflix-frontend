@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { YtsService } from '../service/yts.service'
-import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material';
+import {trigger, state, style, animate, transition} from '@angular/animations';
 
 @Component({
   selector: 'app-movies',
@@ -15,7 +16,7 @@ export class MoviesComponent implements OnInit {
       'cloud',
       sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/cloud-download-regular.svg'));
   }
-  
+
   public movies: any[];
   public isLoading = true;
 

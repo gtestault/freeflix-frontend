@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Cabin');
 /* autoprefixer: off */
+
 .movie-card {
     max-width: 200px;
-    margin-bottom: 1em;
+    border-radius: 2px;
 }
 
 .movies-container {
@@ -14,7 +15,10 @@
 }
 
 .movies-container > .movie {
-    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .movie-title {
@@ -26,7 +30,7 @@
 .movies-loading {
     display: block;
     margin: 0 auto;
-    margin-top: 40vh;
+    margin-top: 30vh;
 }
 
 .imdb-rating {
@@ -52,6 +56,7 @@ a {
 
     h2 {
         margin: 0;
+        margin-left: 1em;
         font-family: 'Cabin', sans-serif;
         color: red;
         font-size: 2.3em;
