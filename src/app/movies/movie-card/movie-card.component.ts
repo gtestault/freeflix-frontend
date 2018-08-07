@@ -4,46 +4,30 @@ import { trigger, state, style, animate, transition} from '@angular/animations';
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
-  styleUrls: ['./movie-card.component.scss'],
-  animations: [
-    trigger('movieState', [
-      state('inactive', style({
-        borderColor: "black"
-      })),
-      state('active',   style({
-        borderColor: 'red',
-      })),
-      transition('inactive => active', animate('0ms ease-in')),
-      transition('active => inactive', animate('0ms ease-out'))
-    ]),
-    trigger('movieStateDim', [
-      state('inactive', style({
-        opacity: 1.0
-      })),
-      state('active', style({
-        opacity: 0.2
-      })),
-      transition('inactive => active', animate('0ms ease-in')),
-      transition('active => inactive', animate('0ms ease-out'))
-    ]),
-    trigger('movieStateShow', [
-      state('inactive', style({
-        opacity: 0
-      })),
-      state('active', style({
-        opacity: 1
-      })),
-      transition('inactive => active', animate('0ms ease-in')),
-      transition('active => inactive', animate('0ms ease-out'))
-    ])
-  ]
+  styleUrls: ['./movie-card.component.scss']
 })
 export class MovieCardComponent implements OnInit {
 
   constructor() { }
-  public state = "inactive";
+  public borderColor = "black";
+  public textOpacity = 0;
+  public imgOpacity = 1;
+
   @Input() public movie : any;
   ngOnInit() {
+  }
+
+  public setActive() {
+    this.borderColor = "red"
+    this.textOpacity = 1;
+    this.imgOpacity = 0.2;
+
+  }
+
+  public setInactive() {
+    this.borderColor = "black"
+    this.textOpacity = 0;
+    this.imgOpacity = 1;
   }
 
   getHashFromTorrent(torrent: any[]): string {
