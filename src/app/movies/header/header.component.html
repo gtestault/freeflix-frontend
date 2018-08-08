@@ -1,0 +1,17 @@
+<div class="header-container">
+  <div>
+    <h2>Freeflix</h2>
+  </div>
+  <form class="search-form" (submit)="searchMovie(search.value)">
+    <div class="search-field">
+      <mat-form-field>
+        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" matInput placeholder="Movie" #search>
+      </mat-form-field>
+    </div>
+  </form>
+  <a [routerLink]="getRedirect()">
+    <div class="downloads-icon" [style.color]="getColor()">
+      <mat-icon svgIcon="cloud" matBadge="1" matBadgeColor="warn"></mat-icon>
+    </div>
+  </a>
+</div>

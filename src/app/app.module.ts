@@ -20,6 +20,7 @@ import { PlayerComponent } from './player/player.component';
 import { LoadingComponent } from './player/loading/loading.component';
 import { MovieCardComponent } from './movies/movie-card/movie-card.component';
 import { DownloadsComponent } from './movies/downloads/downloads.component';
+import { HeaderComponent } from './movies/header/header.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { DownloadsComponent } from './movies/downloads/downloads.component';
     PlayerComponent,
     LoadingComponent,
     MovieCardComponent,
-    DownloadsComponent
+    DownloadsComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

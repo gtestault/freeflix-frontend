@@ -1,18 +1,4 @@
-<div class="header-container">
-  <div>
-    <h2>Freeflix</h2>
-  </div>
-  <form class="search-form" (submit)="searchMovie(search.value)">
-    <div class="search-field">
-      <mat-form-field>
-        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" matInput placeholder="Movie" #search>
-      </mat-form-field>
-    </div>
-  </form>
-  <div class="downloads-icon">
-    <mat-icon svgIcon="cloud" matBadge="3" matBadgeColor="warn"></mat-icon>
-  </div>
-</div>
+<app-header [page]="movies" (search)="onSearch($event)"></app-header>
 <div class="movies-container" *ngIf="movies != undefined">
   <div class="movie" *ngFor="let movie of movies">
     <app-movie-card [movie]="movie"></app-movie-card>
