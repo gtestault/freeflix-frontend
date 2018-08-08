@@ -19,6 +19,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { PlayerComponent } from './player/player.component';
 import { LoadingComponent } from './player/loading/loading.component';
 import { MovieCardComponent } from './movies/movie-card/movie-card.component';
+import { DownloadsComponent } from './movies/downloads/downloads.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MovieCardComponent } from './movies/movie-card/movie-card.component';
     MoviesComponent,
     PlayerComponent,
     LoadingComponent,
-    MovieCardComponent
+    MovieCardComponent,
+    DownloadsComponent
   ],
   imports: [
     BrowserModule,
