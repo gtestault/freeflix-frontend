@@ -11,7 +11,7 @@
   </form>
   <a [routerLink]="getRedirect()">
     <div class="downloads-icon" [style.color]="getColor()">
-      <mat-icon svgIcon="cloud" matBadge="1" matBadgeColor="warn"></mat-icon>
+      <mat-icon svgIcon="cloud" [matBadge]="getTorrentNotification()" matBadgeColor="warn"></mat-icon>
     </div>
   </a>
 </div>

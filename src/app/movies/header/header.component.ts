@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
       sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/cloud-download-regular.svg'));
   }
   @Input() public page = "downloads"
+  @Input() public activeTorrents = 0;
   @Output() search = new EventEmitter<string>();
 
   public getColor() : string {
@@ -22,6 +23,13 @@ export class HeaderComponent implements OnInit {
       return "red"
     }
     return "white"
+  }
+
+  public getTorrentNotification(): string {
+    if (this.activeTorrents === 0) {
+      return ""
+    }
+    return String(this.activeTorrents)
   }
 
   public getRedirect() : string {

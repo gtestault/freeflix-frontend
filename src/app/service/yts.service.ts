@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/htt
 import { catchError, switchMap, skipWhile, take } from 'rxjs/operators';
 import { Observable, throwError, timer } from 'rxjs'
 import { environment } from '../../environments/environment'
+import { TorrentStatus } from './torrentStatus'
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +11,15 @@ import { environment } from '../../environments/environment'
 export class YtsService {
   private ytsServiceURL = '/api/yts'
   private requestMovieURL = '/api/movie/request'
+  private torrentStatusURL = '/api/movie/status'
   constructor(private http: HttpClient) { }
 
   getMoviePage(query: string): Observable<any[]> {
     let params = {}
     if (query !== "") {
-      params["query"] = query 
-    } 
-    return this.http.get<any[]>(environment.endpoint + this.ytsServiceURL, {params: params})
+      params["query"] = query
+    }
+    return this.http.get<any[]>(environment.endpoint + this.ytsServiceURL, { params: params })
       .pipe(
         catchError(this.handleError)
       );
@@ -29,6 +31,13 @@ export class YtsService {
       {
         observe: 'response', params: { "infoHash": infoHash }
       })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getTorrentStatus(): Observable<TorrentStatus[]> {
+    return this.http.get<any>(environment.endpoint + this.torrentStatusURL)
       .pipe(
         catchError(this.handleError)
       );

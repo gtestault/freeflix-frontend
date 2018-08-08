@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { YtsService } from '../service/yts.service'
+import { TorrentStatus } from '../service/torrentStatus'
 
 @Component({
   selector: 'app-movies',
@@ -8,13 +9,14 @@ import { YtsService } from '../service/yts.service'
 })
 export class MoviesComponent implements OnInit {
 
-  constructor(private ytsService: YtsService) {}
+  constructor(private ytsService: YtsService) { }
 
   public movies: any[];
   public isLoading = true;
-
+  public activeTorrents = 0;
   ngOnInit() {
-    this.getYtsMovies("");
+    this.getYtsMovies("")
+    this.getActiveTorrents()
   }
 
   public onSearch(query: string) {
@@ -30,4 +32,10 @@ export class MoviesComponent implements OnInit {
       );
   }
 
+  public getActiveTorrents() {
+    this.ytsService.getTorrentStatus()
+      .subscribe((status: TorrentStatus[]) => {
+        this.activeTorrents = status.length
+      })
+  }
 }
