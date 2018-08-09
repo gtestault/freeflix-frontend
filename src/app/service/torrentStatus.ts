@@ -1,5 +1,6 @@
 export interface TorrentStatus {
-    Name: string 
-    BytesCompleted: number;
+    Name: string; 
+    InfoHash: string;
+    BytesDownloaded: number;
     BytesMissing: number;
 }

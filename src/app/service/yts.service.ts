@@ -12,6 +12,7 @@ export class YtsService {
   private ytsServiceURL = '/api/yts'
   private requestMovieURL = '/api/movie/request'
   private torrentStatusURL = '/api/movie/status'
+  private torrentDeleteURL = '/api/movie/delete'
   constructor(private http: HttpClient) { }
 
   getMoviePage(query: string): Observable<any[]> {
@@ -38,6 +39,13 @@ export class YtsService {
 
   getTorrentStatus(): Observable<TorrentStatus[]> {
     return this.http.get<any>(environment.endpoint + this.torrentStatusURL)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  deleteTorrent(infoHash: string): Observable<{}> {
+    return this.http.delete(environment.endpoint + this.torrentDeleteURL, {params: { "infoHash": infoHash }})
       .pipe(
         catchError(this.handleError)
       );

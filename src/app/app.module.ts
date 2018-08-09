@@ -7,6 +7,7 @@ import { MoviesComponent } from './movies/movies.component';
 
 //external imports
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
@@ -15,6 +16,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { PlayerComponent } from './player/player.component';
 import { LoadingComponent } from './player/loading/loading.component';
@@ -44,6 +47,7 @@ import { HeaderComponent } from './movies/header/header.component';
     MatProgressSpinnerModule,
     MatInputModule,
     MatBadgeModule,
+    MatProgressBarModule,
     AppRoutingModule,
   ],
   providers: [],

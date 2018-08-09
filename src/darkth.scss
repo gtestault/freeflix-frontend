@@ -13,7 +13,7 @@ $candy-app-primary: mat-palette($mat-red);
 $candy-app-accent:  mat-palette($mat-red, A700, A700, A700);
 
 // The warn palette is optional (defaults to red).
-$candy-app-warn:    mat-palette($mat-red);
+$candy-app-warn:    mat-palette($mat-light-green, A400);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $candy-app-theme: mat-dark-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);

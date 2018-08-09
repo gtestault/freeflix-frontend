@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
       'cloud',
       sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/cloud-download-regular.svg'));
   }
+
   @Input() public page = "downloads"
   @Input() public activeTorrents = 0;
   @Output() search = new EventEmitter<string>();

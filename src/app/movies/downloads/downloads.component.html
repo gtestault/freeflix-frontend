@@ -1,1 +1,13 @@
 <app-header page="downloads" [activeTorrents]="this.activeTorrents"></app-header>
+<div class="downloads-container">
+    <div class="card-container" *ngFor="let torrent of status">
+        <mat-card>
+            <mat-card-title>{{torrent.Name}}</mat-card-title>
+            <mat-card-subtitle>{{getHumanizedDownloadStatus(torrent)}}</mat-card-subtitle>
+            <mat-card-content>
+                <mat-progress-bar mode="determinate" [color]="getProgressBarColor(torrent)" [value]="getTorrentPercentage(torrent)"></mat-progress-bar>
+                <button (click)="deleteTorrent(torrent)" class="card-button" color="primary" mat-raised-button >DELETE</button>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
