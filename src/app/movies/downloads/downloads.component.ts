@@ -50,7 +50,7 @@ export class DownloadsComponent implements OnInit {
       return "warn"
     }
     //little hack, since material progress bar only allows 2 different colors, our warn color is green for seeding :D 
-    return "accent"
+    return "primary"
   }
 
   private torrentStatus(): Observable<TorrentStatus[]> {
