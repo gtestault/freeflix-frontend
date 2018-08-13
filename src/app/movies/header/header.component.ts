@@ -40,6 +40,13 @@ export class HeaderComponent implements OnInit {
     return "/downloads"
   }
 
+  IsSearchBarVisible() : boolean {
+    if (this.page === "downloads") {
+      return false;
+    }
+    return true;
+  }
+
   public searchMovie(query: string): boolean {
     this.search.emit(query);
     return false;

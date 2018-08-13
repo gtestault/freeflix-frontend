@@ -19,8 +19,11 @@ export class DownloadsComponent implements OnInit {
 
   ngOnInit() {
     this.torrentStatusSubscription = this.torrentStatus().subscribe((status: TorrentStatus[]) => {
-      this.status = status
+      if (this.activeTorrents === status.length) {
+        return
+      }
       this.activeTorrents = status.length
+      this.status = status
     })
   }
 

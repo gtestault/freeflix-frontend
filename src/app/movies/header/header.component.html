@@ -2,7 +2,7 @@
   <div>
     <h2>Freeflix</h2>
   </div>
-  <form class="search-form" (submit)="searchMovie(search.value)">
+  <form *ngIf="IsSearchBarVisible()" class="search-form" (submit)="searchMovie(search.value)">
     <div class="search-field">
       <mat-form-field>
         <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" matInput placeholder="Movie" #search>
