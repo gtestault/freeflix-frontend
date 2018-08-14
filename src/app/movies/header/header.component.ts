@@ -13,13 +13,16 @@ export class HeaderComponent implements OnInit {
     iconRegistry.addSvgIcon(
       'cloud',
       sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/cloud-download-regular.svg'));
+    iconRegistry.addSvgIcon(
+      'params',
+      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/sliders-h-regular.svg'));
   }
 
   @Input() public page = "downloads"
   @Input() public activeTorrents = 0;
   @Output() search = new EventEmitter<string>();
 
-  public getColor() : string {
+  public getColor(): string {
     if (this.page === "downloads") {
       return "red"
     }
@@ -33,14 +36,14 @@ export class HeaderComponent implements OnInit {
     return String(this.activeTorrents)
   }
 
-  public getRedirect() : string {
+  public getRedirect(): string {
     if (this.page === "downloads") {
       return "/movies"
     }
     return "/downloads"
   }
 
-  IsSearchBarVisible() : boolean {
+  IsSearchBarVisible(): boolean {
     if (this.page === "downloads") {
       return false;
     }

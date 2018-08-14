@@ -2,6 +2,7 @@
   <div>
     <h2>Freeflix</h2>
   </div>
+
   <form *ngIf="IsSearchBarVisible()" class="search-form" (submit)="searchMovie(search.value)">
     <div class="search-field">
       <mat-form-field>
@@ -9,6 +10,9 @@
       </mat-form-field>
     </div>
   </form>
+  <div class="params-icon">
+    <mat-icon svgIcon="params"></mat-icon>
+  </div>
   <a [routerLink]="getRedirect()">
     <div class="downloads-icon" [style.color]="getColor()">
       <mat-icon svgIcon="cloud" [matBadge]="getTorrentNotification()" matBadgeColor="accent"></mat-icon>

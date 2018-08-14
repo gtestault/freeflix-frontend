@@ -15,10 +15,13 @@ export class YtsService {
   private torrentDeleteURL = '/api/movie/delete'
   constructor(private http: HttpClient) { }
 
-  getMoviePage(query: string): Observable<any[]> {
+  getMoviePage(query: string, page: string): Observable<any[]> {
     let params = {}
     if (query !== "") {
       params["query"] = query
+    }
+    if (page !== "") {
+      params["page"] = page
     }
     return this.http.get<any[]>(environment.endpoint + this.ytsServiceURL, { params: params })
       .pipe(
