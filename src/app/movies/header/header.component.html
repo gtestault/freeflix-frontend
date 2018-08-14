@@ -10,7 +10,7 @@
       </mat-form-field>
     </div>
   </form>
-  <div class="params-icon">
+  <div class="params-icon" (click)="openSearchSettingsDialog()">
     <mat-icon svgIcon="params"></mat-icon>
   </div>
   <a [routerLink]="getRedirect()">

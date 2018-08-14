@@ -1,6 +1,7 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output, Inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,12 @@ import { MatIconRegistry } from '@angular/material';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+  searchSorting: string[] = ['title', 'year', 'rating']
+  searchOrder: string[] = ['ascending', 'descending']
+  sorting: string
+  order: string
+
+  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, public dialog: MatDialog) {
     iconRegistry.addSvgIcon(
       'cloud',
       sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/cloud-download-regular.svg'));
@@ -21,6 +27,9 @@ export class HeaderComponent implements OnInit {
   @Input() public page = "downloads"
   @Input() public activeTorrents = 0;
   @Output() search = new EventEmitter<string>();
+
+  ngOnInit() {
+  }
 
   public getColor(): string {
     if (this.page === "downloads") {
@@ -55,7 +64,36 @@ export class HeaderComponent implements OnInit {
     return false;
   }
 
-  ngOnInit() {
+  public openSearchSettingsDialog() {
+    const dialogRef = this.dialog.open(SearchDialog, {  
+      data: {
+        searchSorting: this.searchSorting,
+        searchOrder: this.searchOrder,
+      }
+    })
+
+    dialogRef.afterClosed().subscribe(sorting => {
+      this.sorting = sorting;
+    });
+
+  }
+}
+
+@Component({
+  selector: 'search-dialog',
+  templateUrl: './search-dialog/search-dialog.html',
+  styleUrls: ['./search-dialog/search-dialog.scss']
+})
+export class SearchDialog {
+
+  sorting: string
+
+  constructor(
+    public dialogRef: MatDialogRef<SearchDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  public onOkClick(): void {
+    this.dialogRef.close(this.sorting);
   }
 
 }

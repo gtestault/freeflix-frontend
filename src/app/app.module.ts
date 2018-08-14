@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MoviesComponent } from './movies/movies.component';
@@ -17,13 +18,16 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatRadioModule} from '@angular/material/radio';
+
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { PlayerComponent } from './player/player.component';
 import { LoadingComponent } from './player/loading/loading.component';
 import { MovieCardComponent } from './movies/movie-card/movie-card.component';
 import { DownloadsComponent } from './movies/downloads/downloads.component';
-import { HeaderComponent } from './movies/header/header.component';
+import { HeaderComponent, SearchDialog } from './movies/header/header.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,8 @@ import { HeaderComponent } from './movies/header/header.component';
     LoadingComponent,
     MovieCardComponent,
     DownloadsComponent,
-    HeaderComponent
+    HeaderComponent,
+    SearchDialog
   ],
   imports: [
     BrowserModule,
@@ -48,9 +53,13 @@ import { HeaderComponent } from './movies/header/header.component';
     MatInputModule,
     MatBadgeModule,
     MatProgressBarModule,
+    MatDialogModule,
+    MatRadioModule,
     AppRoutingModule,
+    FormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [SearchDialog]
 })
 export class AppModule { }

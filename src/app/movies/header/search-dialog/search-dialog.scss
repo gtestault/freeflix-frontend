@@ -1,0 +1,21 @@
+.dialog-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 1em 0;
+    margin-bottom: 0;
+}
+
+h3 {
+    margin: 0;
+    font-family: 'Cabin', sans-serif;
+    color: red;
+}
+
+.radio-button {
+    margin-top: 1em;
+    margin-left: 1em;
+}
+
+.radio-button:last-child {
+    margin-bottom: 1em;
+}

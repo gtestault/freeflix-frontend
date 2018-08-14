@@ -1,0 +1,12 @@
+<h2 mat-dialog-title style="margin-bottom: 0">Search Settings</h2>
+<mat-radio-group class="dialog-radio-group" [(ngModel)]="sorting">
+    <h3>Sorting</h3>
+    <mat-radio-button class="radio-button" *ngFor="let sorting of data.searchSorting" [value]="sorting">
+        {{sorting}}
+    </mat-radio-button>
+</mat-radio-group>
+
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button (click)="onOkClick()">Ok</button>
+</mat-dialog-actions>
