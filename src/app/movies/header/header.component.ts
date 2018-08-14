@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   searchOrder: string[] = ['ascending', 'descending']
   sorting: string
   order: string
+  rating: number
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, public dialog: MatDialog) {
     iconRegistry.addSvgIcon(
@@ -72,8 +73,9 @@ export class HeaderComponent implements OnInit {
       }
     })
 
-    dialogRef.afterClosed().subscribe(sorting => {
-      this.sorting = sorting;
+    dialogRef.afterClosed().subscribe(settings => {
+      this.sorting = settings.sorting
+      this.rating = settings.rating
     });
 
   }
@@ -87,13 +89,17 @@ export class HeaderComponent implements OnInit {
 export class SearchDialog {
 
   sorting: string
+  imdbRating: number
 
   constructor(
     public dialogRef: MatDialogRef<SearchDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   public onOkClick(): void {
-    this.dialogRef.close(this.sorting);
+    this.dialogRef.close({sorting: this.sorting, rating: this.imdbRating});
   }
 
+  public updateRating(rating: number) {
+    this.imdbRating = rating
+  }
 }

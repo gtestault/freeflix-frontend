@@ -20,6 +20,8 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatSliderModule} from '@angular/material/slider';
+
 
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -55,6 +57,7 @@ import { HeaderComponent, SearchDialog } from './movies/header/header.component'
     MatProgressBarModule,
     MatDialogModule,
     MatRadioModule,
+    MatSliderModule,
     AppRoutingModule,
     FormsModule
   ],
