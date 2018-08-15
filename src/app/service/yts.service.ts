@@ -4,7 +4,7 @@ import { catchError, switchMap, skipWhile, take } from 'rxjs/operators';
 import { Observable, throwError, timer } from 'rxjs'
 import { environment } from '../../environments/environment'
 import { TorrentStatus } from './torrentStatus'
-
+import { SearchSettings } from './../movies/header/header.component'
 @Injectable({
   providedIn: 'root'
 })
@@ -15,13 +15,19 @@ export class YtsService {
   private torrentDeleteURL = '/api/movie/delete'
   constructor(private http: HttpClient) { }
 
-  getMoviePage(query: string, page: string): Observable<any[]> {
+  getMoviePage(searchSettings: SearchSettings): Observable<any[]> {
     let params = {}
-    if (query !== "") {
-      params["query"] = query
+    if (searchSettings.page) {
+      params['page'] = searchSettings.page
     }
-    if (page !== "") {
-      params["page"] = page
+    if (searchSettings.query) {
+      params['query'] = searchSettings.query
+    }
+    if (searchSettings.rating) {
+      params['rating'] = searchSettings.rating
+    }
+    if (searchSettings.searchSorting) {
+      params['sort_by'] = searchSettings.searchSorting
     }
     return this.http.get<any[]>(environment.endpoint + this.ytsServiceURL, { params: params })
       .pipe(

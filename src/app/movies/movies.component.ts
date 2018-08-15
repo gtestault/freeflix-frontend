@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { YtsService } from '../service/yts.service'
 import { TorrentStatus } from '../service/torrentStatus'
+import { SearchSettings } from './header/header.component'
 
 @Component({
   selector: 'app-movies',
@@ -11,15 +12,15 @@ export class MoviesComponent implements OnInit {
 
   constructor(private ytsService: YtsService) { }
 
-  private queryState : {query:string, page: number} = {
-    query: "",
+  private queryState: SearchSettings = {
     page: 1
   }
   public movies: any[];
   public isLoading = true;
   public activeTorrents = 0;
+
   ngOnInit() {
-    this.getYtsMovies("")
+    this.getYtsMovies(this.queryState)
     this.getActiveTorrents()
   }
 
@@ -30,9 +31,12 @@ export class MoviesComponent implements OnInit {
     }
   }
 
-  public onSearch(query: string) {
-    this.getYtsMovies(query)
-    this.queryState.query = query
+  public onSearch(searchSettings: SearchSettings) {
+    let page = this.queryState.page
+    this.queryState = searchSettings
+    this.queryState.page = page
+    console.log(this.queryState)
+    this.getYtsMovies(this.queryState)
   }
 
   private updateYtsMovies() {
@@ -41,17 +45,17 @@ export class MoviesComponent implements OnInit {
     }
     this.isLoading = true
     this.queryState.page += 1
-    this.ytsService.getMoviePage(this.queryState.query, String(this.queryState.page))
+    this.ytsService.getMoviePage(this.queryState)
       .subscribe(movies => {
         this.movies.push(...movies)
         this.isLoading = false;
-    }
-    );
+      }
+      );
 
   }
 
-  getYtsMovies(query: string): void {
-    this.ytsService.getMoviePage(query, "")
+  getYtsMovies(queryState: SearchSettings): void {
+    this.ytsService.getMoviePage(queryState)
       .subscribe(movies => {
         this.movies = movies;
         this.isLoading = false;

@@ -3,6 +3,14 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
+export interface SearchSettings {
+  query? : string
+  searchSorting? : "title" | "year" | "rating"
+  searchOrder? : "ascending" | "descending"
+  rating? : number
+  page? : number
+}
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -10,11 +18,9 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class HeaderComponent implements OnInit {
 
-  searchSorting: string[] = ['title', 'year', 'rating']
-  searchOrder: string[] = ['ascending', 'descending']
-  sorting: string
-  order: string
-  rating: number
+  searchSortings: string[] = ['title', 'year', 'rating']
+  searchOrders: string[] = ['ascending', 'descending']
+  searchSettings: SearchSettings = {}
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, public dialog: MatDialog) {
     iconRegistry.addSvgIcon(
@@ -27,7 +33,7 @@ export class HeaderComponent implements OnInit {
 
   @Input() public page = "downloads"
   @Input() public activeTorrents = 0;
-  @Output() search = new EventEmitter<string>();
+  @Output() search = new EventEmitter<SearchSettings>();
 
   ngOnInit() {
   }
@@ -61,21 +67,23 @@ export class HeaderComponent implements OnInit {
   }
 
   public searchMovie(query: string): boolean {
-    this.search.emit(query);
+    this.searchSettings.query = query
+    this.search.emit(this.searchSettings);
     return false;
   }
 
   public openSearchSettingsDialog() {
     const dialogRef = this.dialog.open(SearchDialog, {  
       data: {
-        searchSorting: this.searchSorting,
-        searchOrder: this.searchOrder,
+        searchSorting: this.searchSortings,
+        searchOrder: this.searchOrders,
       }
     })
 
     dialogRef.afterClosed().subscribe(settings => {
-      this.sorting = settings.sorting
-      this.rating = settings.rating
+      if (settings.sorting) this.searchSettings.searchSorting = settings.sorting
+      if (settings.rating) this.searchSettings.rating = settings.rating
+      this.search.emit(this.searchSettings)
     });
 
   }
