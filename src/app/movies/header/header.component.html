@@ -1,5 +1,5 @@
 <div class="header-container">
-  <div>
+  <div class="header">
     <h2>Freeflix</h2>
   </div>
 
@@ -10,11 +10,11 @@
       </mat-form-field>
     </div>
   </form>
-  <div class="params-icon" (click)="openSearchSettingsDialog()">
+  <div *ngIf="IsSearchBarVisible()" class="params-icon" (click)="openSearchSettingsDialog()">
     <mat-icon svgIcon="params"></mat-icon>
   </div>
-  <a [routerLink]="getRedirect()">
-    <div class="downloads-icon" [style.color]="getColor()">
+  <a [routerLink]="getRedirect()" class="downloads-icon">
+    <div [style.color]="getColor()">
       <mat-icon svgIcon="cloud" [matBadge]="getTorrentNotification()" matBadgeColor="accent"></mat-icon>
     </div>
   </a>

@@ -11,17 +11,20 @@
         }
     }
 
-    h2 {
+    .header {
         margin: 0;
         margin-left: 1em;
+        flex:  none;
+        margin-right: auto;
+    }
+
+    h2 {
         font-family: 'Cabin', sans-serif;
         color: red;
         font-size: 2.3em;
         text-align: left;
-        flex:  1;
     }
     .search-form {
-        margin-left: auto;
         .search-field {
             text-align: center;
         }
@@ -29,15 +32,14 @@
     
 
     .downloads-icon {
-        flex: 1; 
+        flex: none; 
         text-align: right;
         margin-right: 2em;
-        margin-left: 1em;
+        margin-left: auto;
         color: white;
     }
 
     .params-icon {
-        margin-right: auto;
         flex: none;
         color:white;
         margin-left: 1em;
