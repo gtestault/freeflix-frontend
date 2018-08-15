@@ -4,11 +4,11 @@ import { MatIconRegistry } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 export interface SearchSettings {
-  query? : string
-  searchSorting? : "title" | "year" | "rating"
-  searchOrder? : "ascending" | "descending"
-  rating? : number
-  page? : number
+  query?: string
+  searchSorting?: "title" | "year" | "rating"
+  searchOrder?: "ascending" | "descending"
+  rating?: number
+  page?: number
 }
 
 @Component({
@@ -20,8 +20,9 @@ export class HeaderComponent implements OnInit {
 
   searchSortings: string[] = ['title', 'year', 'rating']
   searchOrders: string[] = ['ascending', 'descending']
-  searchSettings: SearchSettings = {}
 
+  @Input() searchSettings: SearchSettings
+  sortIcon = "sortDown"
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, public dialog: MatDialog) {
     iconRegistry.addSvgIcon(
       'cloud',
@@ -29,6 +30,12 @@ export class HeaderComponent implements OnInit {
     iconRegistry.addSvgIcon(
       'params',
       sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/sliders-h-regular.svg'));
+    iconRegistry.addSvgIcon(
+      'sortUp',
+      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/sort-up.svg'));
+    iconRegistry.addSvgIcon(
+      'sortDown',
+      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/sort-down.svg'));
   }
 
   @Input() public page = "downloads"
@@ -36,6 +43,17 @@ export class HeaderComponent implements OnInit {
   @Output() search = new EventEmitter<SearchSettings>();
 
   ngOnInit() {
+  }
+
+  switchSorting() {
+    if (this.searchSettings.searchOrder === "descending") {
+      this.searchSettings.searchOrder = "ascending"
+      this.sortIcon = "sortUp"
+    } else {
+      this.searchSettings.searchOrder = "descending"
+      this.sortIcon = "sortDown"
+    }
+    this.search.emit(this.searchSettings)
   }
 
   public getColor(): string {
@@ -73,7 +91,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public openSearchSettingsDialog() {
-    const dialogRef = this.dialog.open(SearchDialog, {  
+    const dialogRef = this.dialog.open(SearchDialog, {
       data: {
         searchSorting: this.searchSortings,
         searchOrder: this.searchOrders,
@@ -103,12 +121,12 @@ export class SearchDialog {
   constructor(
     public dialogRef: MatDialogRef<SearchDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      this.sorting = data.searchSettings.searchSorting
-      this.imdbRating = data.searchSettings.rating
-    }
+    this.sorting = data.searchSettings.searchSorting
+    this.imdbRating = data.searchSettings.rating
+  }
 
   public onOkClick(): void {
-    this.dialogRef.close({sorting: this.sorting, rating: this.imdbRating});
+    this.dialogRef.close({ sorting: this.sorting, rating: this.imdbRating });
   }
 
   public updateRating(rating: number) {

@@ -13,6 +13,9 @@
   <div *ngIf="IsSearchBarVisible()" class="params-icon" (click)="openSearchSettingsDialog()">
     <mat-icon svgIcon="params"></mat-icon>
   </div>
+  <div *ngIf="IsSearchBarVisible()" class="sort-icon" (click)="switchSorting()">
+    <mat-icon  [svgIcon]="this.sortIcon"></mat-icon>
+  </div>
   <a [routerLink]="getRedirect()" class="downloads-icon">
     <div [style.color]="getColor()">
       <mat-icon svgIcon="cloud" [matBadge]="getTorrentNotification()" matBadgeColor="accent"></mat-icon>

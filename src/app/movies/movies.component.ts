@@ -12,8 +12,11 @@ export class MoviesComponent implements OnInit {
 
   constructor(private ytsService: YtsService) { }
 
-  private queryState: SearchSettings = {
-    page: 1
+  public queryState: SearchSettings = {
+    page: 1,
+    searchSorting: "year",
+    searchOrder: "descending",
+    rating: 7
   }
   public movies: any[];
   public isLoading = true;
@@ -34,6 +37,7 @@ export class MoviesComponent implements OnInit {
   public onSearch(searchSettings: SearchSettings) {
     this.queryState = searchSettings
     this.queryState.page = 1
+    console.log(this.queryState)
     this.getYtsMovies(this.queryState)
   }
 

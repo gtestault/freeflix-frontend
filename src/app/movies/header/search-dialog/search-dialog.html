@@ -1,6 +1,6 @@
 <h2 mat-dialog-title style="margin-bottom: 0">Search Settings</h2>
 <mat-radio-group class="dialog-radio-group" [(ngModel)]="sorting">
-    <h3>Sorting</h3>
+    <h3>Sort by</h3>
     <mat-radio-button class="radio-button" *ngFor="let sorting of data.searchSorting" [value]="sorting">
         {{sorting}}
     </mat-radio-button>

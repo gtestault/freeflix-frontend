@@ -29,6 +29,13 @@ export class YtsService {
     if (searchSettings.searchSorting) {
       params['sort_by'] = searchSettings.searchSorting
     }
+    if (searchSettings.searchOrder) {
+      if (searchSettings.searchOrder === "ascending") {
+        params['order_by'] = 'asc'
+      } else {
+        params['order_by'] = 'desc'
+      }
+    }
     return this.http.get<any[]>(environment.endpoint + this.ytsServiceURL, { params: params })
       .pipe(
         catchError(this.handleError)

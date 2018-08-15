@@ -1,4 +1,4 @@
-<app-header page="movies" [activeTorrents]="this.activeTorrents" (search)="onSearch($event)"></app-header>
+<app-header page="movies" [searchSettings]="this.queryState" [activeTorrents]="this.activeTorrents" (search)="onSearch($event)"></app-header>
 <div class="movies-container" *ngIf="movies != undefined">
   <div class="movie" *ngFor="let movie of movies">
     <app-movie-card [movie]="movie"></app-movie-card>
