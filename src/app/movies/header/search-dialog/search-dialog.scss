@@ -9,6 +9,7 @@ h3 {
     margin: 0;
     font-family: 'Cabin', sans-serif;
     color: red;
+    font-size: 1em;
 }
 
 .radio-button {
@@ -22,4 +23,7 @@ h3 {
 
 .imdb-slider {
     margin-top: 1.5em;
+    display: block;
+    width: auto;
+    margin-left: auto;
 }

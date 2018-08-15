@@ -32,9 +32,8 @@ export class MoviesComponent implements OnInit {
   }
 
   public onSearch(searchSettings: SearchSettings) {
-    let page = this.queryState.page
     this.queryState = searchSettings
-    this.queryState.page = page
+    this.queryState.page = 1
     console.log(this.queryState)
     this.getYtsMovies(this.queryState)
   }

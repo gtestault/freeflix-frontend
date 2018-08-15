@@ -77,6 +77,7 @@ export class HeaderComponent implements OnInit {
       data: {
         searchSorting: this.searchSortings,
         searchOrder: this.searchOrders,
+        searchSettings: this.searchSettings
       }
     })
 
@@ -101,7 +102,10 @@ export class SearchDialog {
 
   constructor(
     public dialogRef: MatDialogRef<SearchDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      this.sorting = data.searchSettings.searchSorting
+      this.imdbRating = data.searchSettings.rating
+    }
 
   public onOkClick(): void {
     this.dialogRef.close({sorting: this.sorting, rating: this.imdbRating});
