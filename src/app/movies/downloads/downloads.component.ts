@@ -19,9 +19,6 @@ export class DownloadsComponent implements OnInit {
 
   ngOnInit() {
     this.torrentStatusSubscription = this.torrentStatus().subscribe((status: TorrentStatus[]) => {
-      if (this.activeTorrents === status.length) {
-        return
-      }
       this.activeTorrents = status.length
       this.status = status
     })
@@ -45,6 +42,8 @@ export class DownloadsComponent implements OnInit {
   }
   
   public deleteTorrent(torrent: TorrentStatus) {
+    //remove torrent instantly for better ux
+    this.status = this.status.filter(t => t.InfoHash !== torrent.InfoHash)
     this.ytsService.deleteTorrent(torrent.InfoHash.toUpperCase()).subscribe(_ => {})
   }
 

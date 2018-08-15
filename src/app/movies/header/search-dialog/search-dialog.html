@@ -6,7 +6,7 @@
     </mat-radio-button>
 </mat-radio-group>
 <h3>min IMDB Rating</h3>
-<mat-slider (valueChange)="updateRating($event)" class="imdb-slider" min="1" max="9" thumbLabel></mat-slider>
+<mat-slider (valueChange)="updateRating($event)" class="imdb-slider" min="1" max="9" thumbLabel [value]="imdbRating"></mat-slider>
 <mat-dialog-actions>
     <button mat-button mat-dialog-close>Cancel</button>
     <button mat-button (click)="onOkClick()">Ok</button>
