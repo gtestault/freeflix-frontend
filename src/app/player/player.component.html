@@ -7,7 +7,7 @@
 
     <ul id="video-controls" class="controls">
       <li>
-        <button id="playpause" type="button">Play/Pause</button>
+        <mat-icon [svgIcon]="playing ? 'pause': 'play'" id="playpause"></mat-icon>
       </li>
       <li class="progress">
         <progress id="progress" value="0" min="0">
@@ -15,7 +15,7 @@
         </progress>
       </li>
       <li>
-        <button id="mute" type="button">Mute/Unmute</button>
+        <mat-icon svgIcon="volume-up" id="mute"></mat-icon>
       </li>
       <li>
         <button id="volinc" type="button">Vol+</button>
@@ -24,7 +24,7 @@
         <button id="voldec" type="button">Vol-</button>
       </li>
       <li>
-        <button id="fs" type="button">Fullscreen</button>
+        <mat-icon svgIcon="expand" id="fs"></mat-icon>
       </li>
     </ul>
   </figure>

@@ -26,16 +26,16 @@ export class HeaderComponent implements OnInit {
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, public dialog: MatDialog) {
     iconRegistry.addSvgIcon(
       'cloud',
-      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/cloud-download-regular.svg'));
+      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/cloud-download-regular.svg'))
     iconRegistry.addSvgIcon(
       'params',
-      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/sliders-h-regular.svg'));
+      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/sliders-h-regular.svg'))
     iconRegistry.addSvgIcon(
       'sortUp',
-      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/sort-up.svg'));
+      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/sort-up.svg'))
     iconRegistry.addSvgIcon(
       'sortDown',
-      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/sort-down.svg'));
+      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/sort-down.svg'))
   }
 
   @Input() public page = "downloads"
