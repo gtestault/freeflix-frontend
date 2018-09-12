@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   endpoint: "http://localhost:8080"
-};
+}
 
 /*
  * In development mode, to ignore zone related error stack frames such as

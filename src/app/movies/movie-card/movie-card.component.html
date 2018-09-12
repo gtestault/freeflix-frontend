@@ -1,4 +1,4 @@
-<a routerLink="/player" [queryParams]="{movie: getHashFromTorrent(movie.Torrents)}">
+<a routerLink="/player" [queryParams]="{movie: getHashFromTorrent(movie.Torrents), poster: movie.large_cover_image}">
   <div class="movie-card" [style.borderColor]="borderColor" (mouseenter)="setActive()" (mouseleave)="setInactive()">
 
     <img [style.opacity]="imgOpacity" [src]="movie.large_cover_image">
