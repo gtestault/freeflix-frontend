@@ -1,16 +1,28 @@
-import {Component, OnInit, Input, HostListener} from "@angular/core"
+import {Component, OnInit, OnDestroy, Input, HostListener} from "@angular/core"
 import {YtsService} from "../service/yts.service"
 import {ActivatedRoute} from "@angular/router"
 import {environment} from "../../environments/environment"
 import {MatIconRegistry} from "@angular/material"
 import {DomSanitizer} from "@angular/platform-browser"
 
+interface Document {
+  exitFullscreen: any
+  mozCancelFullScreen: any
+  webkitExitFullscreen: any
+  fullscreenElement: any
+  mozFullScreenElement: any
+  webkitFullscreenElement: any
+}
+
 @Component({
   selector: "app-player",
   templateUrl: "./player.component.html",
   styleUrls: ["./player.component.scss"]
 })
-export class PlayerComponent implements OnInit {
+export class PlayerComponent implements OnInit, OnDestroy {
+  static DARK_THEME_BG_COLOR = "#303030"
+  static DIM_BG_COLOR = "#111111"
+
   constructor(
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
@@ -43,13 +55,15 @@ export class PlayerComponent implements OnInit {
   public endpoint = environment.endpoint
   @Input() videoTitle: string
   public infoHash: string
-  public poster: string
   public playing: boolean
 
   ngOnInit() {
     // Cover image if video is not started.
-    this.poster = this.route.snapshot.queryParamMap.get("poster")
     this.fetchTorrent()
+  }
+
+  ngOnDestroy() {
+    document.body.style.backgroundColor = PlayerComponent.DARK_THEME_BG_COLOR
   }
 
   private fetchTorrent() {
@@ -70,6 +84,7 @@ export class PlayerComponent implements OnInit {
     })
   }
 
+  // You can Play/Pause the video by pressing the space bar.
   @HostListener("document:keypress", ["$event"])
   handleKeyboardEvent(event: KeyboardEvent) {
     const KEYCODE_SPACE = 32
@@ -78,13 +93,17 @@ export class PlayerComponent implements OnInit {
       if (video.paused || video.ended) {
         video.play()
         this.playing = true
+        document.body.style.backgroundColor = PlayerComponent.DIM_BG_COLOR
       } else {
         video.pause()
         this.playing = false
+        document.body.style.backgroundColor = PlayerComponent.DARK_THEME_BG_COLOR
       }
     }
   }
-
+  
+  // Initialize the video controls. This is a bit messy because we often need to consider specific browser prefixes.
+  // Implementation ported from MDN Network: Creating a cross-browser video player.
   private initControls() {
     // We assume the browser supports the video tag.
     const videoContainer = document.getElementById("videoContainer")
@@ -104,9 +123,11 @@ export class PlayerComponent implements OnInit {
       if (video.paused || video.ended) {
         video.play()
         this.playing = true
+        document.body.style.backgroundColor = PlayerComponent.DIM_BG_COLOR
       } else {
         video.pause()
         this.playing = false
+        document.body.style.backgroundColor = PlayerComponent.DARK_THEME_BG_COLOR
       }
     })
 
@@ -134,5 +155,38 @@ export class PlayerComponent implements OnInit {
         }
       }
     }
+    fullscreen.addEventListener("click", () => {
+      handleFullscreen()
+    })
+
+    // Web development is fun!
+    const handleFullscreen = () => {
+      if (isFullScreen()) {
+        if (document.exitFullscreen) {
+          document.exitFullscreen()
+        } else if (document["mozCancelFullScreen"]) {
+          document["mozCancelFullScreen"]()
+        } else if (document.webkitCancelFullScreen) {
+          document.webkitCancelFullScreen()
+        } else if (document["msExitFullscreen"]) {
+          document["msExitFullscreen"]()
+        }
+      } else {
+        if (videoContainer.requestFullscreen) {
+          videoContainer.requestFullscreen()
+        } else if (videoContainer["mozRequestFullScreen"]) {
+          videoContainer["mozRequestFullScreen"]()
+        } else if (videoContainer.webkitRequestFullScreen) {
+          videoContainer.webkitRequestFullScreen()
+        } else if (videoContainer["msRequestFullscreen"]) {
+          videoContainer["msRequestFullscreen"]()
+        }
+      }
+    }
+    const isFullScreen = function () {
+      return !!(document["fullScreen"] || document["webkitIsFullScreen"] ||
+        document["mozFullScreen"] || document["msFullscreenElement"] || document.fullscreenElement)
+    }
+
   }// End init controls
 }

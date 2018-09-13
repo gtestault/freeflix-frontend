@@ -5,28 +5,26 @@
       Your browser does not support the video tag.
     </video>
 
-    <ul id="video-controls" class="controls">
-      <li>
-        <mat-icon [svgIcon]="playing ? 'pause': 'play'" id="playpause"></mat-icon>
-      </li>
-      <li class="progress">
-        <progress id="progress" value="0" min="0">
-          <span id="progress-bar"></span>
-        </progress>
-      </li>
-      <li>
-        <mat-icon svgIcon="volume-up" id="mute"></mat-icon>
-      </li>
-      <li>
-        <button id="volinc" type="button">Vol+</button>
-      </li>
-      <li>
-        <button id="voldec" type="button">Vol-</button>
-      </li>
-      <li>
-        <mat-icon svgIcon="expand" id="fs"></mat-icon>
-      </li>
-    </ul>
+    <div id="video-controls">
+      <ul id="video-buttons" class="controls">
+        <li>
+          <mat-icon [svgIcon]="playing ? 'pause': 'play'" id="playpause"></mat-icon>
+        </li>
+        <li>
+          <mat-icon svgIcon="volume-up" id="mute"></mat-icon>
+        </li>
+        <li>
+          <button id="volinc" type="button">Vol+</button>
+        </li>
+        <li>
+          <button id="voldec" type="button">Vol-</button>
+        </li>
+        <li>
+          <mat-icon svgIcon="expand" id="fs"></mat-icon>
+        </li>
+      </ul>
+      <mat-slider id="progress" step="0.25"></mat-slider>
+    </div>
   </figure>
 </div>
 <app-loading *ngIf="isLoading" [text]="loadingText" class="movies-loading"></app-loading>

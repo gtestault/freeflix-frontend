@@ -5,7 +5,8 @@
 }
 
 video {
-  height: 90vh;
+  width: 100%;
+  height: auto;
 }
 
 ul {
@@ -13,24 +14,36 @@ ul {
   list-style-type: none;
 }
 
+li:hover {
+  cursor: pointer;
+}
+
 #dashboard {
-  text-align: center;
 }
 
 #videoContainer {
-  display: inline-block;
   position: relative;
   margin: 1em 0 0;
 
   #video-controls {
     display: flex;
-    flex-flow: row nowrap;
-    margin: 1em 1em;
-    justify-content: space-between;
+    flex-flow: column;
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    color: white;
+
+    #video-buttons {
+      display: flex;
+      flex-flow: row nowrap;
+      margin: 1em 1em 0;
+      padding: 0 0.5em;
+      justify-content: space-between;
+      color: white;
+    }
+
+    #progress {
+      margin: 0 1em 0.5em;
+    }
   }
 }
