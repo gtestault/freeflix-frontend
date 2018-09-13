@@ -26,6 +26,7 @@ li:hover {
   margin: 1em 0 0;
 
   #video-controls {
+    transition: opacity 0.5s ease;
     display: flex;
     flex-flow: column;
     position: absolute;

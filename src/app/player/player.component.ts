@@ -48,7 +48,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
   public infoHash: string
   public playing: boolean
   public videoMetaData: {duration?: number, time?: number} = {}
-
+  // Reference of the timeout hiding the video player controls
+  public controlsHideTimeoutRef: any
 
   ngOnInit() {
     // Cover image if video is not started.
@@ -76,6 +77,27 @@ export class PlayerComponent implements OnInit, OnDestroy {
       }, 100)
     })
   }
+
+  public hideControls(event?: MouseEvent) {
+    const videoContainer = document.getElementById("videoContainer")
+    const videoControls = document.getElementById("video-controls")
+    clearTimeout(this.controlsHideTimeoutRef)
+    videoContainer.style.cursor = "default"
+    videoControls.style.opacity = "1.0"
+    this.controlsHideTimeoutRef = setTimeout(() => {
+      videoContainer.style.cursor = "none"
+      videoControls.style.opacity = "0"
+    }, 3000)
+  }
+
+  public showControls(event: MouseEvent) {
+    const videoControls = document.getElementById("video-controls")
+    const videoContainer = document.getElementById("videoContainer")
+    videoContainer.style.cursor = "default"
+    videoControls.style.opacity = "1.0"
+    clearTimeout(this.controlsHideTimeoutRef)
+  }
+
   public seek(time: number) {
     const video = <HTMLVideoElement>document.getElementById("video")
     if (video) {
@@ -89,6 +111,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     const KEYCODE_SPACE = 32
     const video = <HTMLVideoElement>document.getElementById("video")
     if (event.keyCode === KEYCODE_SPACE && video != null) {
+      this.hideControls(null)
       if (video.paused || video.ended) {
         video.play()
         this.playing = true
@@ -107,7 +130,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     const videoContainer = document.getElementById("videoContainer")
     const video = <HTMLVideoElement>document.getElementById("video")
     const videoControls = document.getElementById("video-controls")
-    video.controls = false
+      video.controls = false
 
     const playpause = document.getElementById("playpause")
     const mute = document.getElementById("mute")

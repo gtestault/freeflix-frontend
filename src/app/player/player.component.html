@@ -1,5 +1,8 @@
 <div id="dashboard">
-  <figure id="videoContainer" *ngIf="videoAvailable">
+  <figure id="videoContainer" *ngIf="videoAvailable"
+          (mousemove)="hideControls($event)"
+          (mouseenter)="hideControls($event)"
+          (mouseleave)="showControls($event)">
     <video id="video">
       <source [src]="endpoint + '/api/movie/watch?infoHash=' + infoHash" type="video/mp4">
       Your browser does not support the video tag.
