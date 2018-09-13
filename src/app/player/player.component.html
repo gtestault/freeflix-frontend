@@ -23,7 +23,7 @@
           <mat-icon svgIcon="expand" id="fs"></mat-icon>
         </li>
       </ul>
-      <mat-slider id="progress" step="0.25"></mat-slider>
+      <mat-slider (valueChange)="seek($event)" id="progress" step="1" [max]="videoMetaData.duration" [value]="videoMetaData.time"></mat-slider>
     </div>
   </figure>
 </div>

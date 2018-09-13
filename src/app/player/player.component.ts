@@ -5,15 +5,6 @@ import {environment} from "../../environments/environment"
 import {MatIconRegistry} from "@angular/material"
 import {DomSanitizer} from "@angular/platform-browser"
 
-interface Document {
-  exitFullscreen: any
-  mozCancelFullScreen: any
-  webkitExitFullscreen: any
-  fullscreenElement: any
-  mozFullScreenElement: any
-  webkitFullscreenElement: any
-}
-
 @Component({
   selector: "app-player",
   templateUrl: "./player.component.html",
@@ -56,6 +47,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
   @Input() videoTitle: string
   public infoHash: string
   public playing: boolean
+  public videoMetaData: {duration?: number, time?: number} = {}
+
 
   ngOnInit() {
     // Cover image if video is not started.
@@ -83,6 +76,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
       }, 100)
     })
   }
+  public seek(time: number) {
+    const video = <HTMLVideoElement>document.getElementById("video")
+    if (video) {
+      video.currentTime = time
+    }
+  }
 
   // You can Play/Pause the video by pressing the space bar.
   @HostListener("document:keypress", ["$event"])
@@ -101,7 +100,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
       }
     }
   }
-  
   // Initialize the video controls. This is a bit messy because we often need to consider specific browser prefixes.
   // Implementation ported from MDN Network: Creating a cross-browser video player.
   private initControls() {
@@ -116,7 +114,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
     const volinc = document.getElementById("volinc")
     const voldec = document.getElementById("voldec")
     const progress = document.getElementById("progress")
-    const progressBar = document.getElementById("progress-bar")
     const fullscreen = document.getElementById("fs")
 
     playpause.addEventListener("click", () => {
@@ -129,6 +126,19 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.playing = false
         document.body.style.backgroundColor = PlayerComponent.DARK_THEME_BG_COLOR
       }
+    })
+
+    video.addEventListener('loadedmetadata', () => {
+      this.videoMetaData.duration = video.duration
+    })
+
+    video.addEventListener('timeupdate', () => {
+      this.videoMetaData.time = video.currentTime
+      // Some mobile browsers don't send video duration in loadedmetadata event
+      if (!this.videoMetaData.duration) {
+        this.videoMetaData.duration = video.duration
+      }
+      console.log(this.videoMetaData)
     })
 
     mute.addEventListener("click", () => {
@@ -188,5 +198,5 @@ export class PlayerComponent implements OnInit, OnDestroy {
         document["mozFullScreen"] || document["msFullscreenElement"] || document.fullscreenElement)
     }
 
-  }// End init controls
+  }// End initControls
 }
