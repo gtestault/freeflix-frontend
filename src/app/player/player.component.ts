@@ -108,6 +108,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   // You can Play/Pause the video by pressing the space bar.
   @HostListener("document:keypress", ["$event"])
   handleKeyboardEvent(event: KeyboardEvent) {
+    event.preventDefault()
     const KEYCODE_SPACE = 32
     const video = <HTMLVideoElement>document.getElementById("video")
     if (event.keyCode === KEYCODE_SPACE && video != null) {
@@ -161,7 +162,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
       if (!this.videoMetaData.duration) {
         this.videoMetaData.duration = video.duration
       }
-      console.log(this.videoMetaData)
     })
 
     mute.addEventListener("click", () => {
