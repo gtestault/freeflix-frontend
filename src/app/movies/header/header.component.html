@@ -1,12 +1,15 @@
 <div class="header-container">
   <div class="header">
-    <h2>Freeflix</h2>
+    <a routerLink="/movies">
+      <h2>Freeflix</h2>
+    </a>
   </div>
 
   <form *ngIf="IsSearchBarVisible()" class="search-form" (submit)="searchMovie(search.value)">
     <div class="search-field">
       <mat-form-field>
-        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" matInput placeholder="Movie" #search>
+        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" matInput placeholder="Movie"
+               #search>
       </mat-form-field>
     </div>
   </form>
@@ -14,7 +17,17 @@
     <mat-icon svgIcon="params"></mat-icon>
   </div>
   <div *ngIf="IsSearchBarVisible()" class="sort-icon" (click)="switchSorting()">
-    <mat-icon  [svgIcon]="this.sortIcon"></mat-icon>
+    <mat-icon [svgIcon]="this.sortIcon"></mat-icon>
+  </div>
+  <div class="magnet-formfield" *ngIf="IsMagnetBarVisible()" (submit)="addMagnet(magnet.value)">
+    <form>
+      <mat-form-field appearance="outline">
+        <mat-label>Magnet Link</mat-label>
+        <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+               matInput placeholder="magnet:" #magnet>
+        <mat-icon svgIcon="magnet" matSuffix></mat-icon>
+      </mat-form-field>
+    </form>
   </div>
   <a [routerLink]="getRedirect()" class="downloads-icon">
     <div [style.color]="getColor()">

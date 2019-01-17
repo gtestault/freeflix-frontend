@@ -30,6 +30,7 @@ import { LoadingComponent } from './player/loading/loading.component';
 import { MovieCardComponent } from './movies/movie-card/movie-card.component';
 import { DownloadsComponent } from './movies/downloads/downloads.component';
 import { HeaderComponent, SearchDialog } from './movies/header/header.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { HeaderComponent, SearchDialog } from './movies/header/header.component'
     MovieCardComponent,
     DownloadsComponent,
     HeaderComponent,
-    SearchDialog
+    SearchDialog,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,7 @@ export class YtsService {
   private requestMovieURL = "/api/movie/request"
   private torrentStatusURL = "/api/movie/status"
   private torrentDeleteURL = "/api/movie/delete"
+  private magnetAddURL = '/api/movie/add'
 
   constructor(private http: HttpClient) {
   }
@@ -54,6 +55,9 @@ export class YtsService {
       .pipe(
         catchError(this.handleError)
       )
+  }
+  addMagnet(magnetURI: string): Observable<{}> {
+    return this.http.get(environment.endpoint + this.magnetAddURL, {params: {"magnetURI": magnetURI}})
   }
 
   getTorrentStatus(): Observable<TorrentStatus[]> {

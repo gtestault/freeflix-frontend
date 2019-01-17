@@ -1,7 +1,7 @@
-import { Component, OnInit, EventEmitter, Input, Output, Inject } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { MatIconRegistry } from '@angular/material';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import {Component, OnInit, EventEmitter, Input, Output, Inject} from "@angular/core"
+import {DomSanitizer} from "@angular/platform-browser"
+import {MatIconRegistry} from "@angular/material"
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from "@angular/material"
 
 export interface SearchSettings {
   query?: string
@@ -12,35 +12,39 @@ export interface SearchSettings {
 }
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  selector: "app-header",
+  templateUrl: "./header.component.html",
+  styleUrls: ["./header.component.scss"]
 })
 export class HeaderComponent implements OnInit {
 
-  searchSortings: string[] = ['title', 'year', 'rating']
-  searchOrders: string[] = ['ascending', 'descending']
+  searchSortings: string[] = ["title", "year", "rating"]
+  searchOrders: string[] = ["ascending", "descending"]
 
   @Input() searchSettings: SearchSettings
   sortIcon = "sortDown"
+
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, public dialog: MatDialog) {
     iconRegistry.addSvgIcon(
-      'cloud',
-      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/cloud-download-regular.svg'))
+      "cloud",
+      sanitizer.bypassSecurityTrustResourceUrl("../assets/icons/cloud-download-regular.svg"))
     iconRegistry.addSvgIcon(
-      'params',
-      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/sliders-h-regular.svg'))
+      "params",
+      sanitizer.bypassSecurityTrustResourceUrl("../assets/icons/sliders-h-regular.svg"))
     iconRegistry.addSvgIcon(
-      'sortUp',
-      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/sort-up.svg'))
+      "sortUp",
+      sanitizer.bypassSecurityTrustResourceUrl("../assets/icons/sort-up.svg"))
     iconRegistry.addSvgIcon(
-      'sortDown',
-      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/sort-down.svg'))
+      "sortDown",
+      sanitizer.bypassSecurityTrustResourceUrl("../assets/icons/sort-down.svg"))
+    iconRegistry.addSvgIcon(
+      "magnet",
+      sanitizer.bypassSecurityTrustResourceUrl("../assets/icons/magnet.svg"))
   }
 
   @Input() public page = "downloads"
-  @Input() public activeTorrents = 0;
-  @Output() search = new EventEmitter<SearchSettings>();
+  @Input() public activeTorrents = 0
+  @Output() search = new EventEmitter<SearchSettings>()
 
   ngOnInit() {
   }
@@ -78,16 +82,22 @@ export class HeaderComponent implements OnInit {
   }
 
   IsSearchBarVisible(): boolean {
-    if (this.page === "downloads") {
-      return false;
-    }
-    return true;
+    return this.page !== "downloads"
+  }
+
+  IsMagnetBarVisible(): boolean {
+    return this.page === "downloads"
   }
 
   public searchMovie(query: string): boolean {
     this.searchSettings.query = query
-    this.search.emit(this.searchSettings);
-    return false;
+    this.search.emit(this.searchSettings)
+    return false
+  }
+
+  public addMagnet(magnetURI: string): boolean {
+    console.log(magnetURI)
+    return false
   }
 
   public openSearchSettingsDialog() {
@@ -103,15 +113,15 @@ export class HeaderComponent implements OnInit {
       if (settings.sorting) this.searchSettings.searchSorting = settings.sorting
       if (settings.rating) this.searchSettings.rating = settings.rating
       this.search.emit(this.searchSettings)
-    });
+    })
 
   }
 }
 
 @Component({
-  selector: 'search-dialog',
-  templateUrl: './search-dialog/search-dialog.html',
-  styleUrls: ['./search-dialog/search-dialog.scss']
+  selector: "search-dialog",
+  templateUrl: "./search-dialog/search-dialog.html",
+  styleUrls: ["./search-dialog/search-dialog.scss"]
 })
 export class SearchDialog {
 
@@ -126,7 +136,7 @@ export class SearchDialog {
   }
 
   public onOkClick(): void {
-    this.dialogRef.close({ sorting: this.sorting, rating: this.imdbRating });
+    this.dialogRef.close({sorting: this.sorting, rating: this.imdbRating})
   }
 
   public updateRating(rating: number) {

@@ -220,6 +220,5 @@ export class PlayerComponent implements OnInit, OnDestroy {
       return !!(document["fullScreen"] || document["webkitIsFullScreen"] ||
         document["mozFullScreen"] || document["msFullscreenElement"] || document.fullscreenElement)
     }
-
   }// End initControls
 }

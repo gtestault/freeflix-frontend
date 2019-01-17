@@ -18,6 +18,10 @@
         margin-right: auto;
     }
 
+    a {
+      text-decoration: none;
+    }
+
     h2 {
         font-family: 'Cabin', sans-serif;
         color: red;
@@ -29,7 +33,10 @@
             text-align: center;
         }
     }
-    
+
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
 
     .downloads-icon {
         flex: none; 
